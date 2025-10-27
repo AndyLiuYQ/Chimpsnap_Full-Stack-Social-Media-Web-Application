@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Font awesome for fa icons -->
+  <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+  <!-- Including styles.css file -->
+  <link rel="stylesheet" type="text/css" href="uploadpage.css" />
+  <title>File upload with preview</title>
+</head>
+<body>
+
+  <!-- Back button -->
+  <button class="button1" id="btn" style="position:fixed; left:30px; top:30px" onclick="history.back()">back</button>
+
+  <!-- File input and preview -->
+  <div class="profile-picture" style="position: fixed; top:100px">
+    <h1 class="upload-icon">
+      <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+    </h1>
+    <input class="file-uploader" type="file" onchange="upload()" accept="image/*" />
+  </div>
+
+  <!-- Form for text input and submission -->
+  <div class="form-container">
+    <form class="form" id="uploadForm">
+      <div class="form-group">
+        <label for="text">标题</label>
+        <input type="text" id="email" name="email" required="" />
+      </div>
+      <div class="form-group">
+        <label for="textarea">分享一下你的图片的故事吧！</label>
+        <textarea name="textarea" id="textarea" rows="10" cols="50" required=""></textarea>
+      </div>
+      <button class="form-submit-btn" type="submit">提交</button>
+    </form>
+  </div>
+
+  <!-- Include scripts.js file -->
+  <script src="uploading.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <title>账号注册</title>
+    <link rel="stylesheet" href="login.css" />
+    <script src="signup.js" defer></script>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <form class="form">
+      <label class="lb" for="nome">
+        <span style="color: white">账号:</span>
+      </label>
+      <input
+        name="nome"
+        id="nome"
+        type="text"
+        class="infos"
+        size="16"
+        pattern="^[0-9a-zA-Z]{1,16}$"
+        maxlength="16"
+        required
+      />
+
+      <label for="password" class="lb">
+        <span style="color: white">密码:</span>
+      </label>
+      <input
+        name="password"
+        id="password"
+        type="password"
+        class="infos"
+        style="
+          width: 100%;
+          padding: 10px;
+          font-size: 16px;
+          border-radius: 5px;
+          border: none;
+          margin-bottom: 20px;
+          background-color: #333333;
+          color: rgb(255, 255, 255);
+        "
+        required
+      />
+
+      <label for="password2" class="lb">
+        <span style="color: white">确认密码:</span>
+      </label>
+      <input
+        name="password2"
+        id="password2"
+        type="password"
+        class="infos"
+        style="
+          width: 100%;
+          padding: 10px;
+          font-size: 16px;
+          border-radius: 5px;
+          border: none;
+          margin-bottom: 20px;
+          background-color: #333333;
+          color: rgb(255, 255, 255);
+        "
+        required
+      />
+
+      <button id="limpar" type="submit">注册</button>
+    </form>
+  </body>
+</html>

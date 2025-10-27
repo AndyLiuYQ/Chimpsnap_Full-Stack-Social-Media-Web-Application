@@ -1,0 +1,260 @@
+body {
+  /* Basic dimensions and centering */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* Dark mode colors and gradient */
+  background: #121212; /* Fallback for browsers that don't support gradients */
+  background: linear-gradient(
+    135deg,
+    #121212 25%,
+    #1a1a1a 25%,
+    #1a1a1a 50%,
+    #121212 50%,
+    #121212 75%,
+    #1a1a1a 75%,
+    #1a1a1a
+  );
+  background-size: 40px 40px;
+
+  /* Animation */
+  animation: move 4s linear infinite;
+}
+
+@keyframes move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 40px 40px;
+  }
+}
+
+.form-container {
+  width: 400px;
+  background: linear-gradient(#212121, #212121) padding-box,
+    linear-gradient(145deg, transparent 35%, #ffffff, #000000) border-box;
+  border: 2px solid transparent;
+  padding: 32px 24px;
+  font-size: 14px;
+  font-family: inherit;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  bottom: 10%;
+  position:fixed;
+}
+
+.form-container button:active {
+  scale: 0.95;
+}
+
+.form-container .form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-container .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.form-container .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  color: #717171;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.form-container .form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  background-color: transparent;
+  border: 1px solid #414141;
+}
+
+.form-container .form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  resize: none;
+  color: #fff;
+  height: 96px;
+  border: 1px solid #414141;
+  background-color: transparent;
+  font-family: inherit;
+}
+
+.form-container .form-group input::placeholder {
+  opacity: 0.5;
+}
+
+.form-container .form-group input:focus {
+  outline: none;
+  border-color: #bfb6c0;
+}
+
+.form-container .form-group textarea:focus {
+  outline: none;
+  border-color: #bfb6c0;
+}
+
+.form-container .form-submit-btn {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: flex-start;
+  font-family: inherit;
+  color: #717171;
+  font-weight: 600;
+  width: 40%;
+  background: #313131;
+  border: 1px solid #414141;
+  padding: 12px 16px;
+  font-size: inherit;
+  gap: 8px;
+  margin-top: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.form-container .form-submit-btn:hover {
+  background-color: #fff;
+  border-color: #fff;
+}
+
+/* From Uiverse.io by csemszepp */
+.custum-file-upload {
+  height: 200px;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #e8e8e8;
+  background-color: #212121;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px #e8e8e8;
+}
+
+.custum-file-upload .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+  height: 80px;
+  fill: #e8e8e8;
+}
+
+.custum-file-upload .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.custum-file-upload .text span {
+  font-weight: 400;
+  color: #e8e8e8;
+}
+
+.custum-file-upload input {
+  display: none;
+}
+
+
+.button1 {
+  padding: 10px 20px;
+  text-transform: uppercase;
+  border-radius: 8px;
+  font-size: 17px;
+  font-weight: 500;
+  color: #ffffff80;
+  text-shadow: none;
+  background: transparent;
+  cursor: pointer;
+  box-shadow: transparent;
+  border: 1px solid #ffffff80;
+  transition: 0.5s ease;
+  user-select: none;
+}
+
+.button1:hover,
+.button1:focus {
+  color: #ffffff;
+  background: #000000;
+  border: 1px solid #0b161f97;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+  box-shadow: 0 0 5px #161717, 0 0 20px #161717, 0 0 50px #161717,
+    0 0 100px #161717;
+}
+
+
+.profile-picture {
+  opacity: 0.75;
+  height: 300px;
+  width: 300px;
+  position: relative;
+  overflow: hidden;
+
+  /* default image */
+  background: url('https://free2.yunpng.top/2024/08/21/66c588ffebd95.png');
+  background-color: black;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 8px 6px -6px black;
+  border-radius: 10%;
+}
+
+.file-uploader {
+  /* make it invisible */
+  opacity: 0;
+  /* make it take the full height and width of the parent container */
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  /* make it absolute */
+  position: absolute;
+  top: 0%;
+  left: 0%;
+}
+
+.upload-icon {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* initial icon state */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  color: #ccc;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #bbb;
+}
+
+/* toggle icon state */
+.profile-picture:hover .upload-icon {
+  opacity: 1;
+}
+
+

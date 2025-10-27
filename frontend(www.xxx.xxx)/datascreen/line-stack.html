@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* 设置 container 的背景为透明 */
+    #container {
+      height: 100%;
+      width: 100%; /* 确保容器宽度为 100% */
+      background: transparent; /* 背景透明 */
+      position: relative; /* 确保容器位置正确 */
+    }
+  </style>
+</head>
+<body style="height: 30%; width:50%;margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/echarts.min.js"></script>
+  
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+
+    var option = {
+      title: {
+        text: ''
+      },
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+      },
+      grid: {
+        left: '15%',   /* 增加 left 边距以调整图表的大小 */
+        right: '15%',  /* 增加 right 边距以调整图表的大小 */
+        bottom: '15%', /* 增加 bottom 边距以调整图表的大小 */
+        top: '20%',    /* 增加 top 边距以调整图表的大小 */
+        containLabel: true
+      },
+      
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          name: 'Email',
+          type: 'line',
+          stack: 'Total',
+          data: [120, 132, 101, 134, 90, 230, 210]
+        },
+        {
+          name: 'Union Ads',
+          type: 'line',
+          stack: 'Total',
+          data: [220, 182, 191, 234, 290, 330, 310]
+        },
+        {
+          name: 'Video Ads',
+          type: 'line',
+          stack: 'Total',
+          data: [150, 232, 201, 154, 190, 330, 410]
+        },
+        {
+          name: 'Direct',
+          type: 'line',
+          stack: 'Total',
+          data: [320, 332, 301, 334, 390, 330, 320]
+        },
+        {
+          name: 'Search Engine',
+          type: 'line',
+          stack: 'Total',
+          data: [820, 932, 901, 934, 1290, 1330, 1320]
+        }
+      ]
+    };
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

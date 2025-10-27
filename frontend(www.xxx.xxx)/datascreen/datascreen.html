@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+  <style>
+    /* 设置容器的尺寸和位置 */
+    .chart1 {
+      height: 400px; /* 使用视口高度填满整个页面 */
+      width: 400px;  /* 设置容器宽度 */
+      margin: 0; /* 无外边距 */
+      background: transparent; /* 背景透明 */
+      position: absolute; /* 绝对定位 */
+      left: 40px; /* 紧靠左侧 */
+      top: 0; /* 从顶部开始 */
+    }
+    body {
+    /* Basic dimensions and centering */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    /* Dark mode colors and gradient */
+    background: #121212; /* Fallback for browsers that don't support gradients */
+    background: linear-gradient(
+      135deg,
+      #121212 25%,
+      #1a1a1a 25%,
+      #1a1a1a 50%,
+      #121212 50%,
+      #121212 75%,
+      #1a1a1a 75%,
+      #1a1a1a
+    );
+    background-size: 40px 40px;
+  
+    /* Animation */
+    animation: move 4s linear infinite;
+
+    .center-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+  }
+  </style>
+</head>
+<body style="height: 100%; width: 100%; margin: 0; ">
+
+<link rel="stylesheet" href="usercard.css">
+<script src="usercard.js"></script>
+<div class="card" style="position:absolute;top:80px;right:130px">
+      <div class="bg uwu"></div>
+      <div class="bg"></div>
+      <div class="content">
+            <div class="img" id="userhead">
+                  
+            </div>
+            <div class="h1" id="username">
+                  Johnathon
+            </div>
+            <div class="p" >
+                 <p id="usernickname"> Professional human</p>
+                  <p id="signature">
+                        I do human things such as exist, eat foot, and work.
+                  </p>
+            </div>
+      </div>
+</div>
+ 
+
+
+
+
+
+
+  <img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/3e5cde34fba322024f6cd74c7611d64.png"
+     style="
+       position: absolute; 
+       top: 40%; 
+       left: 50%; 
+       transform: translate(-50%, -50%); 
+       height: 150px;">
+<div class="chart1">
+  <div id="container" style="height: 100%; width: 100%;"></div>
+</div>
+
+<script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/echarts.min.js"></script>
+
+<script type="text/javascript">
+
+
+    // Function to fetch data and update chart
+    async function fetchData1() {
+        console.log("!!!");
+        var dom = document.getElementById('container');
+            var myChart = echarts.init(dom, 'dark', {
+              renderer: 'canvas',
+              useDirtyRect: false
+            });
+    
+      try {
+        // Send a GET request to the API
+        const response = await fetch(
+          "http://103.117.121.141:8080/datas/gender",
+          {
+            method: "GET",
+          }
+        );
+        console.log("!!!");
+
+        // Check if the response is OK
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+          console.log("!!!");
+        }
+
+        // Parse the response
+        
+        const result = await response.json();
+        console.log(result);
+        const male = result.data[0] || 0;
+        const female = result.data[1] || 0;
+        const others = result.data[2] || 0;
+        console.log(male);
+
+        // Update chart data
+    var updatedOption = {
+      backgroundColor: 'transparent', // 设置背景透明
+      legend: {
+        top: 'bottom'
+      },
+      toolbox: {
+        show: false, // 隐藏工具箱
+      },
+      series: [
+        {
+          name: 'Nightingale Chart',
+          type: 'pie',
+          radius: ['30%', '70%'], // 缩小图表半径
+          center: ['50%', '50%'],
+          roseType: 'area',
+          itemStyle: {
+            borderRadius: 8
+          },
+          data: [
+            { value: male, name: '男' },
+            { value: female, name: '女' },
+            { value: others, name: '其他' }
+          ]
+        }
+      ],
+      animation: false // 取消入场动画
+    };
+        var maleValue = updatedOption.series[0].data.find(item => item.name === '男');
+        console.log(maleValue);
+        if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+        myChart.setOption(updatedOption);
+        //alert("!!!!!");
+
+      } catch (error) {
+        console.error("Request failed: " + error.message);
+      }
+    }
+
+    // Fetch data when the page loads
+    window.onload = fetchData1;
+    document.addEventListener('DOMContentLoaded', () => {
+    fetchData1(); // 初次加载页面时调用一次
+    setInterval(fetchData1, 5000); // 每隔5秒调用一次
+});
+  </script>
+
+
+
+
+
+<link rel="stylesheet" href="reallycard.css">
+<div class="container4" style="position: fixed; left:690px; bottom:100px">
+  <div data-text="Github" style="--r:-15;" class="glass" id="github">
+    
+      <img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/22c1f334506bfa46dd514d7a8bfead6.png" style="height:70px;">
+    
+  </div>
+  <div data-text="Code" style="--r:5;" class="glass" id="code">
+    <svg viewBox="0 0 640 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z"
+      ></path>
+    </svg>
+  </div>
+  <div data-text="Earn" style="--r:25;" class="glass" id="earn">
+    <svg viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M64 64C28.7 64 0 92.7 0 128V384c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128c0-35.3-28.7-64-64-64H64zm64 320H64V320c35.3 0 64 28.7 64 64zM64 192V128h64c0 35.3-28.7 64-64 64zM448 384c0-35.3 28.7-64 64-64v64H448zm64-192c-35.3 0-64-28.7-64-64h64v64zM288 160a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"
+      ></path>
+    </svg>
+  </div>
+</div>
+<script src="reallycard.js"></script>
+
+
+
+
+
+<link rel="stylesheet" href="datascreen.css">
+<div class="main">
+  <div class="currentplaying">
+    <svg height="50px" width="50px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="spotify"><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(0 -534)" r="43.888" cy="572.064" cx="33.34" id="ipdIa4~cOclR8yt_ClW93a"><stop stop-color="#f4e9c3" offset="0"></stop><stop stop-color="#f8eecd" offset=".219"></stop><stop stop-color="#fdf4dc" offset=".644"></stop><stop stop-color="#fff6e1" offset="1"></stop></radialGradient>
+      <img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png" style="height:60px"><path d="M41.683,44.394c-0.365,0-0.731-0.181-1.096-0.365c-3.471-2.009-7.674-3.105-12.24-3.105	c-2.559,0-5.116,0.364-7.491,0.912c-0.365,0-0.914,0.183-1.096,0.183c-0.914,0-1.461-0.732-1.461-1.462	c0-0.913,0.547-1.463,1.279-1.643c2.923-0.732,5.846-1.096,8.951-1.096c5.116,0,9.866,1.276,13.885,3.655	c0.548,0.364,0.914,0.73,0.914,1.642C43.145,43.847,42.414,44.394,41.683,44.394z M44.241,38.181c-0.547,0-0.912-0.18-1.279-0.364	c-3.835-2.375-9.135-3.839-15.163-3.839c-2.924,0-5.664,0.366-7.674,0.916c-0.549,0.18-0.731,0.18-1.096,0.18	c-1.096,0-1.827-0.912-1.827-1.826c0-1.096,0.549-1.645,1.461-2.009c2.74-0.73,5.481-1.279,9.317-1.279	c6.213,0,12.241,1.463,16.991,4.384c0.73,0.364,1.096,1.096,1.096,1.826C46.069,37.269,45.337,38.181,44.241,38.181z M47.165,30.876	c-0.548,0-0.731-0.182-1.279-0.364c-4.385-2.559-10.961-4.021-17.356-4.021c-3.289,0-6.577,0.366-9.5,1.096	c-0.366,0-0.731,0.182-1.279,0.182c-1.279,0.183-2.193-0.912-2.193-2.192c0-1.279,0.731-2.009,1.644-2.192	c3.471-1.096,7.125-1.462,11.327-1.462c6.943,0,14.25,1.462,19.731,4.567c0.73,0.366,1.278,1.096,1.278,2.193	C49.357,29.961,48.442,30.876,47.165,30.876z" fill="#fff"></path></svg>
+    <p class="heading">帖子热榜</p>
+  </div>
+  <div class="loader" id="loader1">
+    <div class="song">
+      
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover">
+      
+      <img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  <div class="loader" id="loader2">
+    <div class="song">
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover"><img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  <div class="loader" id="loader3">
+    <div class="song">
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover"><img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  <div class="loader" id="loader4">
+    <div class="song">
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover"><img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  <div class="loader" id="loader5">
+    <div class="song">
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover"><img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  
+  <script src="rank.js"></script>
+
+  
+
+  <script>
+        // 每5秒（5000毫秒）刷新页面
+        setInterval(function() {
+            //window.location.reload();
+        }, 5000);
+    </script>
+
+   
+  
+   <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.1/files/dist/echarts.min.js"></script>
+   <script type="text/javascript">
+     var dom = document.getElementById('container1');
+     var myChart = echarts.init(dom, null, {
+       renderer: 'canvas',
+       useDirtyRect: false
+     });
+ 
+     var option = {
+       title: {
+         text: ''
+       },
+       tooltip: {
+         trigger: 'axis'
+       },
+       legend: {
+         data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+       },
+       grid: {
+         left: '15%',
+         right: '15%',
+         bottom: '15%',
+         top: '20%',
+         containLabel: true
+       },
+       xAxis: {
+         type: 'category',
+         boundaryGap: false,
+         data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+       },
+       yAxis: {
+         type: 'value'
+       },
+       series: [
+         {
+           name: 'Email',
+           type: 'line',
+           stack: 'Total',
+           data: [120, 132, 101, 134, 90, 230, 210]
+         },
+         {
+           name: 'Union Ads',
+           type: 'line',
+           stack: 'Total',
+           data: [220, 182, 191, 234, 290, 330, 310]
+         },
+         {
+           name: 'Video Ads',
+           type: 'line',
+           stack: 'Total',
+           data: [150, 232, 201, 154, 190, 330, 410]
+         },
+         {
+           name: 'Direct',
+           type: 'line',
+           stack: 'Total',
+           data: [320, 332, 301, 334, 390, 330, 320]
+         },
+         {
+           name: 'Search Engine',
+           type: 'line',
+           stack: 'Total',
+           data: [820, 932, 901, 934, 1290, 1330, 1320]
+         }
+       ]
+     };
+ 
+     if (option && typeof option === 'object') {
+       myChart.setOption(option);
+     }
+ 
+     window.addEventListener('resize', myChart.resize);
+   </script>
+   
+   
+<link rel="stylesheet" href="postrank.css">
+<div class="main4">
+  <div class="currentplaying">
+    <svg height="50px" width="50px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" class="spotify"><radialGradient gradientUnits="userSpaceOnUse" gradientTransform="translate(0 -534)" r="43.888" cy="572.064" cx="33.34" id="ipdIa4~cOclR8yt_ClW93a"><stop stop-color="#f4e9c3" offset="0"></stop><stop stop-color="#f8eecd" offset=".219"></stop><stop stop-color="#fdf4dc" offset=".644"></stop><stop stop-color="#fff6e1" offset="1"></stop></radialGradient>
+      <img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png" style="height:60px"><path d="M41.683,44.394c-0.365,0-0.731-0.181-1.096-0.365c-3.471-2.009-7.674-3.105-12.24-3.105	c-2.559,0-5.116,0.364-7.491,0.912c-0.365,0-0.914,0.183-1.096,0.183c-0.914,0-1.461-0.732-1.461-1.462	c0-0.913,0.547-1.463,1.279-1.643c2.923-0.732,5.846-1.096,8.951-1.096c5.116,0,9.866,1.276,13.885,3.655	c0.548,0.364,0.914,0.73,0.914,1.642C43.145,43.847,42.414,44.394,41.683,44.394z M44.241,38.181c-0.547,0-0.912-0.18-1.279-0.364	c-3.835-2.375-9.135-3.839-15.163-3.839c-2.924,0-5.664,0.366-7.674,0.916c-0.549,0.18-0.731,0.18-1.096,0.18	c-1.096,0-1.827-0.912-1.827-1.826c0-1.096,0.549-1.645,1.461-2.009c2.74-0.73,5.481-1.279,9.317-1.279	c6.213,0,12.241,1.463,16.991,4.384c0.73,0.364,1.096,1.096,1.096,1.826C46.069,37.269,45.337,38.181,44.241,38.181z M47.165,30.876	c-0.548,0-0.731-0.182-1.279-0.364c-4.385-2.559-10.961-4.021-17.356-4.021c-3.289,0-6.577,0.366-9.5,1.096	c-0.366,0-0.731,0.182-1.279,0.182c-1.279,0.183-2.193-0.912-2.193-2.192c0-1.279,0.731-2.009,1.644-2.192	c3.471-1.096,7.125-1.462,11.327-1.462c6.943,0,14.25,1.462,19.731,4.567c0.73,0.366,1.278,1.096,1.278,2.193	C49.357,29.961,48.442,30.876,47.165,30.876z" fill="#fff"></path></svg>
+    <p class="heading">用户热榜</p>
+  </div>
+  <div class="loader" id="loaderp1">
+    <div class="song">
+      
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover">
+      
+      <img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  <div class="loader" id="loaderp2">
+    <div class="song">
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover"><img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  <div class="loader" id="loaderp3">
+    <div class="song">
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover"><img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  <div class="loader" id="loaderp4">
+    <div class="song">
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover"><img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  <div class="loader" id="loaderp5">
+    <div class="song">
+      <p class="name">Time in a Bottle</p>
+      <p class="artist">Jim Corce</p>
+    </div>
+    <div class="albumcover"><img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png"></div>
+    <div class="loading">
+      <p></p>
+      
+    </div>
+  </div>
+  
+  <script src="rankpost.js"></script>
+
+
+
+
+
+<!--新用户展示卡片-->
+
+
+
+</body>
+</html>

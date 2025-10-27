@@ -1,0 +1,215 @@
+<head>
+  <link rel="stylesheet" href="searchpage.css" />
+  <meta charset="UTF-8" />
+</head>
+
+
+<div class="search-result">搜索结果</div>
+
+
+<button class="button1" id="btn" style="position:fixed; left:30px; top:30px;" onclick="history.back()">back</button>
+<div class="container" id="container">
+ 
+</div>
+
+<script>
+  function createNewMainElement(data) {
+    // 创建新的 main 元素
+    const mainElement = document.createElement("div");
+    mainElement.classList.add("main");
+
+
+    // 创建新的 card 元素
+    const cardElement = document.createElement("div");
+    cardElement.classList.add("card");
+    cardElement.style.backgroundImage = `url('${data.newestPage}')`;
+
+    // 创建 fl 元素及其子元素
+    const flElement = document.createElement("div");
+    flElement.classList.add("fl");
+    const fullscreenElement = document.createElement("div");
+    fullscreenElement.classList.add("fullscreen");
+    const svgElement = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    svgElement.setAttribute("viewBox", "0 0 100 100");
+    svgElement.classList.add("fullscreen_svg");
+    // 添加 SVG 的 path 元素
+    const pathElement = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    pathElement.setAttribute(
+      "d",
+      "M3.563-.004a3.573 3.573 0 0 0-3.527 4.09l-.004-.02v28.141c0 1.973 1.602 3.57 3.57 3.57s3.57-1.598 3.57-3.57V12.218v.004l22.461 22.461a3.571 3.571 0 0 0 6.093-2.527c0-.988-.398-1.879-1.047-2.523L12.218 7.172h19.989c1.973 0 3.57-1.602 3.57-3.57s-1.598-3.57-3.57-3.57H4.035a3.008 3.008 0 0 0-.473-.035zM96.333 0l-.398.035.02-.004h-28.16a3.569 3.569 0 0 0-3.57 3.57 3.569 3.569 0 0 0 3.57 3.57h19.989L65.323 29.632a3.555 3.555 0 0 0-1.047 2.523 3.571 3.571 0 0 0 6.093 2.527L92.83 12.221v19.985a3.569 3.569 0 0 0 3.57 3.57 3.569 3.569 0 0 0 3.57-3.57V4.034v.004a3.569 3.569 0 0 0-3.539-4.043l-.105.004zM3.548 64.23A3.573 3.573 0 0 0 .029 67.8v28.626-.004l.016.305-.004-.016.004.059v-.012l.039.289-.004-.023.023.121-.004-.023c.074.348.191.656.34.938l-.008-.02.055.098-.008-.02.148.242-.008-.012.055.082-.008-.012c.199.285.43.531.688.742l.008.008.031.027.004.004c.582.461 1.32.742 2.121.762h.004l.078.004h28.61a3.569 3.569 0 0 0 3.57-3.57 3.569 3.569 0 0 0-3.57-3.57H12.224l22.461-22.461a3.569 3.569 0 0 0-2.492-6.125l-.105.004h.008a3.562 3.562 0 0 0-2.453 1.074L7.182 87.778V67.793a3.571 3.571 0 0 0-3.57-3.57h-.055.004zm92.805 0a3.573 3.573 0 0 0-3.519 3.57v19.993-.004L70.373 65.328a3.553 3.553 0 0 0-2.559-1.082h-.004a3.573 3.573 0 0 0-3.566 3.57c0 1.004.414 1.91 1.082 2.555l22.461 22.461H67.802a3.57 3.57 0 1 0 0 7.14h28.606c.375 0 .742-.059 1.082-.168l-.023.008.027-.012-.02.008.352-.129-.023.008.039-.02-.02.008.32-.156-.02.008.023-.016-.008.008c.184-.102.34-.207.488-.32l-.008.008.137-.113-.008.004.223-.211.008-.008c.156-.164.301-.34.422-.535l.008-.016-.008.016.008-.02.164-.285.008-.02-.008.016.008-.02c.098-.188.184-.406.246-.633l.008-.023-.004.008.008-.023a3.44 3.44 0 0 0 .121-.852v-.004l.004-.078V67.804a3.569 3.569 0 0 0-3.57-3.57h-.055.004z"
+    );
+    svgElement.appendChild(pathElement);
+    fullscreenElement.appendChild(svgElement);
+    flElement.appendChild(fullscreenElement);
+    cardElement.appendChild(flElement);
+
+    // 创建 card_content 元素
+    const cardContentElement = document.createElement("div");
+    cardContentElement.classList.add("card_content");
+    const labelElement = document.createElement("label");
+    labelElement.classList.add("switch_738");
+    cardContentElement.appendChild(labelElement);
+    cardElement.appendChild(cardContentElement);
+
+    // 创建 card_back 元素
+    const cardBackElement = document.createElement("div");
+    cardBackElement.classList.add("card_back");
+    cardElement.appendChild(cardBackElement);
+
+    mainElement.appendChild(cardElement);
+    // 创建 data 元素
+    // 创建 data 元素
+const dataElement = document.createElement("div");
+dataElement.classList.add("data");
+
+// 创建 img 元素并更新图片
+const imgElement = document.createElement("div");
+imgElement.classList.add("img");
+const imgTag = document.createElement("img");
+imgTag.src = data.userPic; // 更新图片
+imgElement.appendChild(imgTag);
+dataElement.appendChild(imgElement);
+
+// 创建 text 元素并更新昵称和签名
+const textElement = document.createElement("div");
+textElement.classList.add("text");
+
+const nicknameElement = document.createElement("div");
+nicknameElement.classList.add("text_m");
+nicknameElement.id = "nickname";
+nicknameElement.textContent = data.nickname; // 更新昵称
+
+const signatureElement = document.createElement("div");
+signatureElement.classList.add("text_s");
+signatureElement.id = "signature";
+signatureElement.textContent = data.signature; // 更新签名
+
+textElement.appendChild(nicknameElement);
+textElement.appendChild(signatureElement);
+dataElement.appendChild(textElement);
+
+// 将 dataElement 添加到 mainElement 中
+mainElement.appendChild(dataElement);
+
+
+    // 创建 btns 元素及其子元素
+    const btnsElement = document.createElement("div");
+    btnsElement.classList.add("btns");
+
+    const likesElement = document.createElement("div");
+    likesElement.classList.add("likes");
+    const likesSvgElement = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+    likesSvgElement.setAttribute("viewBox", "-2 0 105 92");
+    likesSvgElement.classList.add("likes_svg");
+    const likesPathElement = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    likesPathElement.setAttribute(
+      "d",
+      "M85.24 2.67C72.29-3.08 55.75 2.67 50 14.9 44.25 2 27-3.8 14.76 2.67 1.1 9.14-5.37 25 5.42 44.38 13.33 58 27 68.11 50 86.81 73.73 68.11 87.39 58 94.58 44.38c10.79-18.7 4.32-35.24-9.34-41.71Z"
+    );
+    likesSvgElement.appendChild(likesPathElement);
+    likesElement.appendChild(likesSvgElement);
+    const likesTextElement = document.createElement("span");
+    likesTextElement.classList.add("likes_text");
+    likesTextElement.id = "likes";
+    likesTextElement.textContent = data.likes; // 更新点赞数
+    likesElement.appendChild(likesTextElement);
+    btnsElement.appendChild(likesElement);
+
+    const viewsElement = document.createElement("div");
+    viewsElement.classList.add("views");
+    const viewsPathElement = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "path"
+    );
+    viewsElement.appendChild(viewsPathElement);
+    const viewsTextElement = document.createElement("span");
+    viewsTextElement.classList.add("views_text");
+    viewsTextElement.id = "followers";
+    viewsTextElement.textContent = `${data.followers} followers`; // 更新关注者数量
+    viewsElement.appendChild(viewsTextElement);
+    btnsElement.appendChild(viewsElement);
+
+    mainElement.appendChild(btnsElement);
+
+    // 将 main 元素插入到容器中
+    const container = document.querySelector(".container");
+    container.appendChild(mainElement);
+    
+    //添加事件监听器
+    mainElement.addEventListener('click', function() {
+        // 将 data 的 username 存储到 localStorage 中
+        localStorage.setItem('UserID', data.id);
+
+        // 跳转到指定页面
+        window.location.href = 'http://www.chimpsnap.fun/otherspage/Selfpage.html';
+    });
+    
+    
+    return mainElement;
+  }
+
+  // 获取数据并动态生成 main 元素
+async function fetchAndGenerateMainElements() {
+  const apiUrl = "http://103.117.121.141:8080/search/nickname"; // 替换为实际的 API 端点
+  try {
+    // 从 localStorage 获取 userName
+    const nickname = localStorage.getItem("userName");
+    if (!nickname) {
+      throw new Error("No nickname found in localStorage.");
+    }
+
+    // 构造请求体
+    const requestbody = JSON.stringify({ nickname });
+    // 发起请求获取数据
+    const response = await fetch(apiUrl, {
+      method: "POST", // 使用 POST 方法
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: requestbody,
+    });
+
+    if (!response.ok) {
+      throw new Error(`Network response was not ok: ${response.statusText}`);
+    }
+
+    // 解析 JSON 数据
+    const databody = await response.json();
+    const data = databody.data;
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error("No data received or data format is incorrect.");
+    }
+
+    // 清空现有的内容
+    const container = document.getElementById("container"); // 确保 HTML 中有 id 为 'container' 的元素
+    container.innerHTML = "";
+    console.error(data);
+
+    // 遍历数据并生成 main 元素
+    data.forEach((item) => {
+      const mainElement = createNewMainElement(item);
+      container.appendChild(mainElement);
+    });
+
+    // 删除 localStorage 中的 userName
+    localStorage.removeItem("userName");
+
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}
+  // 在页面加载或刷新时调用函数
+  window.addEventListener("load", fetchAndGenerateMainElements);
+</script>

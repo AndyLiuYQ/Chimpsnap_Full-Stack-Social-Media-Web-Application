@@ -1,0 +1,235 @@
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="post.css">
+          <meta name="viewport" content="width=device-width" />
+          <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" />-->
+          <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />-->
+          <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />-->
+     <button class="button1" id="btn" style="position:fixed; left:30px; top:30px;z-index: 9999;" onclick="history.back()">back</button>
+     <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // 设置一个阈值，比如 1024px 以下为手机端
+        if (window.innerWidth <= 1500) {
+            var button = document.getElementById("btn"); // 获取按钮元素
+            if (button) {
+                button.parentNode.removeChild(button); // 删除按钮
+            }
+        }
+    });
+</script>
+
+    </head>
+   <section class="main">
+        <div class="wrapper">
+            <div class="left-col">
+
+                <link rel="stylesheet" href="post.css">
+
+                <div class="post">
+                    <div class="info">
+                        <div class="user" style="width:120px">
+                            <button class="info profile-pic-button" aria-label="Profile Picture" onclick="window.location.href='http://www.chimpsnap.fun/otherspage/Selfpage.html'" style="width:50px;height:50px;">
+                                <div class="profile-pic">
+                                    <img src="9ae1f5ba3e897cf0567d34930631125d.jpg" id="createUserpic" alt="Profile Picture">
+                                </div>
+                            </button>
+                            <p class="username" id="nickname" style="z-index:5">klawhileonard</p>
+                        </div>
+                        <img src="" class="options" alt="">
+                    </div>
+                    <img src="微信图片_20240822103820.jpg" id="coverImg" class="post-image" alt="">
+                    <div class="post-content">
+                        <!--<object data="thumbsup.html" type="text/html" style="height: 58px"></object>-->
+                        <link rel="stylesheet" href="thumbsup.css">
+                        
+                        <label class="container">
+                        <input type="checkbox">
+                        <svg id="Glyph" version="1.1" viewBox="0 0 32 32" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M29.845,17.099l-2.489,8.725C26.989,27.105,25.804,28,24.473,28H11c-0.553,0-1-0.448-1-1V13  c0-0.215,0.069-0.425,0.198-0.597l5.392-7.24C16.188,4.414,17.05,4,17.974,4C19.643,4,21,5.357,21,7.026V12h5.002  c1.265,0,2.427,0.579,3.188,1.589C29.954,14.601,30.192,15.88,29.845,17.099z" id="XMLID_254_"></path><path d="M7,12H3c-0.553,0-1,0.448-1,1v14c0,0.552,0.447,1,1,1h4c0.553,0,1-0.448,1-1V13C8,12.448,7.553,12,7,12z   M5,25.5c-0.828,0-1.5-0.672-1.5-1.5c0-0.828,0.672-1.5,1.5-1.5c0.828,0,1.5,0.672,1.5,1.5C6.5,24.828,5.828,25.5,5,25.5z" id="XMLID_256_"></path></svg>
+                        </label> 
+                        <p class="likes" id="likes">2024826 likes</p>
+                        <div class="reaction-wrapper">
+                        </div>
+                        
+                        <p id="title">TITLE </p>
+                        <p class="description" id="content"> Happy 20th Birthday to my son Jinsen Chen, the most sugared kid of all time. Give you all the best whishes</p>
+                        <p class="post-time" id="createTime">26th Aug 2024</p>
+                    </div>
+                    <div class="comment-wrapper">
+                        <img src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png" class="icon" alt="">
+                        <input type="text" class="comment-box" placeholder="Add a comment">
+                        <button  class="comment-btn">send</button>
+                    </div>
+                    <div class="comment-list">
+                        <!-- 评论将会在这里显示 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<script src="thumbslisten.js"></script>
+
+        <script>
+document.addEventListener('DOMContentLoaded', async function() {
+    const commentList = document.querySelector('.comment-list');
+    const token = localStorage.getItem("token");
+    const postId = String(localStorage.getItem('currentPostId'));
+
+    if (!token) {
+        alert("请先登录或注册！");
+        window.location.href = "http://www.chimpsnap.fun/login/login.html";
+        return;
+    }
+
+    // Fetch post information
+    try {
+        const postResponse = await fetch('http://103.117.121.141:8080/posts/uniqueInfo', {
+            method: "GET",
+            headers: {
+                "postsID": `${postId}`,
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        if (!postResponse.ok) throw new Error('Failed to fetch post data');
+        const postData = await postResponse.json();
+        
+        const userIdpage= postData.data.createUser;
+        localStorage.setItem('UserID', userIdpage);
+         console.log('当前用户 ID:', localStorage.getItem('UserID'));
+        document.getElementById('createUserpic').src = postData.data.createUserpic;
+        document.getElementById('coverImg').src = postData.data.coverImg;
+        document.getElementById('likes').textContent = `${postData.data.likes} likes`;
+        document.getElementById('title').textContent = postData.data.title;
+        document.getElementById('content').textContent = postData.data.content;
+        document.getElementById('createTime').textContent = new Date(postData.data.createTime).toLocaleDateString();
+        document.getElementById('nickname').textContent = postData.data.userNickname;
+    } catch (error) {
+        
+        console.error('Error loading post data:', error);
+    }
+
+    // Fetch comments information
+    try {
+        const commentResponse = await fetch('http://103.117.121.141:8080/comments/commentsInfo', {
+            method: "GET",
+            headers: {
+                "postsID": `${postId}`,
+                "Authorization": `Bearer ${token}`
+            }
+        });
+        if (!commentResponse.ok) throw new Error('Failed to fetch comment data');
+        const commentData = await commentResponse.json();
+        
+        commentData.data.forEach(comment => {
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+            
+            const profilePic = document.createElement('img');
+            profilePic.src = comment.userPic; 
+            commentItem.appendChild(profilePic);
+            
+            
+            
+            const nicknameElem = document.createElement('div');
+            nicknameElem.className = 'comment-nickname';
+            nicknameElem.textContent = comment.userNickname; 
+            commentItem.appendChild(nicknameElem);
+            
+            
+            
+            const commentTextElem = document.createElement('div');
+            commentTextElem.className = 'comment-text';
+            commentTextElem.textContent = comment.content;
+            commentItem.appendChild(commentTextElem);
+
+            const commentTimeElem = document.createElement('div');
+            commentTimeElem.className = 'comment-time';
+            commentTimeElem.textContent = new Date(comment.createTime).toLocaleString();
+            commentItem.appendChild(commentTimeElem);
+
+            commentList.appendChild(commentItem);
+        });
+    } catch (error) {
+        console.error('Error loading comments:', error);
+    }
+
+    // Handle comment submission
+    const commentBtn = document.querySelector('.comment-btn');
+    const commentBox = document.querySelector('.comment-box');
+
+    commentBtn.addEventListener('click', async function() {
+        const commentText = commentBox.value.trim();
+        if (commentText) {
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+            
+            const profilePic = document.createElement('img');
+            profilePic.src = '微信图片_20240822001322.jpg'; 
+            commentItem.appendChild(profilePic);
+
+            const nicknameElem = document.createElement('div');
+            nicknameElem.className = 'comment-nickname';
+            nicknameElem.textContent = 'nickname'; 
+            commentItem.appendChild(nicknameElem);
+            
+            const commentTextElem = document.createElement('div');
+            commentTextElem.className = 'comment-text';
+            commentTextElem.textContent = commentText;
+            commentItem.appendChild(commentTextElem);
+
+            const commentTimeElem = document.createElement('div');
+            commentTimeElem.className = 'comment-time';
+            const now = new Date();
+            commentTimeElem.textContent = now.toLocaleString();
+            commentItem.appendChild(commentTimeElem);
+
+            commentList.appendChild(commentItem);
+    
+            // Clear input box
+            commentBox.value = '';
+            const senddata = new URLSearchParams();
+            senddata.append("content",commentText);
+            const token1 = localStorage.getItem("token");
+            const postId1 = String(localStorage.getItem('currentPostId'));
+
+            // Post comment to server
+            try {
+                const response = await fetch('http://103.117.121.141:8080/comments/add', {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token1}`,
+                        "postsId":`${postId1}`
+                    },
+                    body: JSON.stringify({
+                        content:commentText,
+                    }),
+                });
+                const resultCode = await response.json(); 
+                //alert(commentText);
+                
+                if (resultCode.code === 0) {  
+                     window.location.reload(); // 刷新页面
+              //alert("Upload successful!");  
+               
+          } else if (resultCode.code === 1) {  
+              alert("Upload failed."+resultCode.message);  
+          } else {  
+              alert("Unknown error occurred.");  
+          } 
+          
+                
+            } catch (error) {
+                alert(aeeror.message);
+                console.error('Error posting comment:', error);
+            }
+        }
+    });
+});
+</script>
+
+
+
+    
+</html>

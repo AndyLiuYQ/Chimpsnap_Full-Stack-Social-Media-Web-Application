@@ -1,0 +1,105 @@
+
+
+  /* From Uiverse.io by jeremyssocial */ 
+body {
+    /* Basic dimensions and centering */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    /* Dark mode colors and gradient */
+    background: #121212; /* Fallback for browsers that don't support gradients */
+    background: linear-gradient(
+      135deg,
+      #121212 25%,
+      #1a1a1a 25%,
+      #1a1a1a 50%,
+      #121212 50%,
+      #121212 75%,
+      #1a1a1a 75%,
+      #1a1a1a
+    );
+    background-size: 40px 40px;
+  
+    /* Animation */
+    animation: move 4s linear infinite;
+  }
+  
+  @keyframes move {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 40px 40px;
+    }
+  }
+  
+  h1 {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+
+  #table1 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+
+  #table1 td {
+    flex: 1 1 400px;
+    /* 设置每个图表容器的基础宽度和允许的缩放 */
+  }
+
+  .chart-container {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    background-color: #000000;
+  }
+
+  #main,
+  #main2 {
+    width: 600px;
+    height: 300px;
+  }
+
+  /* 新增样式 */
+  #picture4 {
+    width: 100%;
+    max-width: 600px;
+    height: 500px;
+    background-color: #000000;
+    color: #000000;
+    overflow-y: auto;
+  }
+
+  .post-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #000000;
+  }
+
+  .post-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
+  .post-item .content {
+    flex: 1;
+  }
+
+  .post-item .title {
+    font-weight: bold;
+  }
+
+  .post-item .likes {
+    color: #000000;
+  }

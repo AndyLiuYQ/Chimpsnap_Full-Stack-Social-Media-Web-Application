@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>ChimpSnap个人主页</title>
+  <link rel="icon" href="https://i3.imgs.ovh/d/BQACAgEAAx0EUvSR8wACKqpmwqz4NzqZEHSxOH-7aY9i2oZxMwACyQQAAvSUGUaSGE1HYKAayTUE" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+  <link rel="stylesheet" href="Selfpage.css" />
+  <link rel="stylesheet" href="loading.css" />
+  <script>
+        // 在页面加载前检测屏幕宽度
+        if (window.innerWidth <= 1024) { // 使用 1024px 作为阈值
+            window.location.href = "mobile.html"; // 跳转到移动版页面
+        }
+    </script>
+  <script src="get.js" defer></script>
+</head>
+<body>
+  <button class="button1" id="btn" style="position:fixed; left:30px; top:30px" onclick="history.back()">back</button>
+
+  <div class="container2">
+    <header>
+      <div class="profile">
+        <div class="profile-image">
+          <img id="profileImage" src="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/c42e2bea1dd55368c397a13bc335b12.jpg" alt="" width="250" height="250" />
+          
+        </div>
+        <div class="profile-user-settings">
+          <h1 id="profile-user-name" class="profile-user-name">Mr.Chimp🕶</h1>
+          <button id="button1" style="margin-left: 40px;"> 
+              <span class="icon">
+                  <svg viewBox="0 0 24 24" height="33" width="33" xmlns="http://www.w3.org/2000/svg">
+                    <image href="https://chimpsnap.oss-cn-chengdu.aliyuncs.com/30af1a1b52fb44ac09e3963c329c724.png" width="24" height="24"/>
+                  </svg>
+                </span>
+            <span class="text1">Subscribe</span>
+            <span class="text2">Unsubscribe</span> 
+          </button>
+          <!--logout按钮-->
+          
+          
+
+
+          
+          
+           <!--logout按钮-->
+        </div>
+        <div class="profile-stats">
+          <ul>
+            <li><span class="profile-stat-count" id = "posts">0</span> posts</li>
+            <li><span class="profile-stat-count" id = "likes">0</span> likes</li>
+            <li><span class="profile-stat-count" id = "followers">0</span> followers</li>
+          </ul>
+        </div>
+        <div class="profile-bio">
+        <p>
+          <span id="profile-real-name" class="profile-real-name">| 你好 | Hello | こんにちは | Bonjour | Hallo | नमस्ते | Hola | 안녕하세요 | བདེ་མོ |📷✈️🏕️</span>
+        </p>
+        
+        <p id="profile-gender" class="profile-gender" style="margin-top:20px">性别：男</p>
+      </div>
+      <div class="edit-form" style="display: none;">
+        <input type="text" id="edit-user-name" placeholder="给自己取个名字吧！" />
+        <input type="text" id="edit-real-name" placeholder="编辑个性签名" />
+        <select id="edit-gender">
+          <option value="男">男</option>
+          <option value="女">女</option>
+          <option value="未知">未知</option>
+        </select>
+        <button id="save-button">保存</button>
+      </div>
+      </div>
+    </header>
+  </div>
+
+
+
+   <main>
+    <div class="container">
+      <div class="gallery" id="gallery">+
+        <!-- Gallery items will be generated here -->
+      </div>
+     
+     
+<div aria-label="Orange and tan hamster running in a metal wheel" role="img" class="wheel-and-hamster">
+	<div class="wheel"></div>
+	<div class="hamster">
+		<div class="hamster__body">
+			<div class="hamster__head">
+				<div class="hamster__ear"></div>
+				<div class="hamster__eye"></div>
+				<div class="hamster__nose"></div>
+			</div>
+			<div class="hamster__limb hamster__limb--fr"></div>
+			<div class="hamster__limb hamster__limb--fl"></div>
+			<div class="hamster__limb hamster__limb--br"></div>
+			<div class="hamster__limb hamster__limb--bl"></div>
+			<div class="hamster__tail"></div>
+		</div>
+	</div>
+	<div class="spoke"></div>
+</div>
+     
+     
+     
+    </div>
+  </main>
+
+  <script>
+// Function to create a gallery item
+// Function to create a gallery item
+function createGalleryItem(data) {
+  const item = document.createElement('div');
+  item.classList.add('gallery-item');
+  item.tabIndex = 0; // Adding tabindex to make it focusable
+
+  // Create image element
+  const image = document.createElement('img');
+  image.src = data.coverImg;
+  image.alt = data.title || '';
+  image.classList.add('gallery-image');
+
+  // Create gallery item info
+  const info = document.createElement('div');
+  info.classList.add('gallery-item-info');
+
+  const ul = document.createElement('ul');
+
+  // Likes
+  const likesLi = document.createElement('li');
+  likesLi.classList.add('gallery-item-likes');
+  likesLi.innerHTML = `
+    <span class="visually-hidden">Likes:</span>
+    <i class="fas fa-heart" aria-hidden="true"></i> ${data.likes || 0}
+  `;
+
+  // Comments
+  const commentsLi = document.createElement('li');
+  commentsLi.classList.add('gallery-item-comments');
+  commentsLi.innerHTML = `
+    <span class="visually-hidden">Comments:</span>
+    <i class="fas fa-comment" aria-hidden="true"></i> ${data.numComments || 0}
+  `;
+
+  // Append likes and comments to ul
+  ul.appendChild(likesLi);
+  ul.appendChild(commentsLi);
+
+  // Append ul to info
+  info.appendChild(ul);
+
+  // Append image and info to item
+  item.appendChild(image);
+  item.appendChild(info);
+
+ item.addEventListener('click', () => {
+    // Store data.id in localStorage with key 'currentPostId'
+    localStorage.setItem('currentPostId', data.id);
+
+    // Navigate to the post page
+    window.location.href = 'http://www.chimpsnap.fun/post/post.html';
+  });
+
+
+  return item;
+}
+
+
+// Function to load gallery data from the server
+async function loadGallery() {
+  try {
+    const token = localStorage.getItem('token');
+    const UserID = localStorage.getItem("UserID");
+    const response = await fetch('http://103.117.121.141:8080/posts/othersInfo', {
+      method: "GET",
+            headers: {
+                "othersId": `${UserID}`,
+                "Authorization": `Bearer ${token}`
+            }
+    });
+    console.log(response);
+    if (response.ok) {
+      const responseData = await response.json();
+      const galleryData = responseData.data; // Access the .data field
+      
+      if (Array.isArray(galleryData)) { // Ensure galleryData is an array
+        const galleryContainer = document.getElementById('gallery');
+        
+        // Clear existing gallery items if any
+        galleryContainer.innerHTML = '';
+
+        galleryData.forEach(data => {
+          const galleryItem = createGalleryItem(data);
+          galleryContainer.appendChild(galleryItem);
+        });
+      } else {
+        console.error('Expected an array for gallery data but got:', galleryData);
+      }
+    } else {
+      console.error('Failed to fetch gallery data:', response.statusText);
+    }
+  } catch (error) {
+    console.error('Error fetching gallery data:', error);
+  }
+  
+}
+
+
+
+// Load gallery on page load
+document.addEventListener('DOMContentLoaded', loadGallery);
+
+
+  </script>
+  
+  
+</body>
+</html>
+

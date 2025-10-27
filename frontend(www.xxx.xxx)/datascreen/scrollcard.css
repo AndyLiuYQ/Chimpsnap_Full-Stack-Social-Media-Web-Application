@@ -1,0 +1,96 @@
+/* 自定义滚动条样式 */
+.scroll-1::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-1::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: #888;
+}
+
+/* 设置 container 的样式 */
+.container {
+    position: fixed; /* 固定位置 */
+    bottom: 60px; /* 距离顶部 10px */
+    left: 80px; /* 距离右侧 10px */
+    width: 250px; /* 调整宽度 */
+    height: 350px; /* 调整高度 */
+    display: flex;
+    flex-direction: column; /* 垂直布局 */
+    overflow-y: scroll; /* 竖向滚动 */
+    padding: 16px; /* 调整内边距 */
+    scroll-snap-type: y mandatory; /* 竖向对齐 */
+    scroll-padding-left: 0; /* 取消滚动边距 */
+    border-radius: 8px;
+    gap: 16px; /* 调整间距 */
+    background-color: #1c1c1c; /* 背景颜色 */
+}
+
+/* 设置 card 的样式 */
+.container .card {
+    flex: 0 0 auto; /* 不拉伸 */
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #141414;
+    scroll-snap-align: start;
+}
+
+/* 设置 card 内部 image 的样式 */
+.card .card__image {
+    width: 100%; /* 使图片宽度占满容器 */
+    height: 140px; /* 设置固定高度 */
+}
+
+/* 各种 card 背景 */
+.card:nth-child(1) .card__image {
+    background-image: linear-gradient(
+        to right top,
+        #051937, 
+        #004d7a, 
+        #008793, 
+        #00bf72, 
+        #a8eb12
+    );
+}
+
+.card:nth-child(2) .card__image {
+    background-image: linear-gradient(
+        to right top, 
+        #dc09a5, 
+        #ce00b4, 
+        #ba00c5, 
+        #9c00d8, 
+        #6f12eb
+    );
+}
+
+.card:nth-child(3) .card__image {
+    background-image: linear-gradient(
+        to right top, 
+        #dc1009, 
+        #e55f00, 
+        #e49200, 
+        #dac000, 
+        #c7eb12
+    );
+}
+
+/* card 内容的样式 */
+.card .card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px; /* 调整内边距 */
+}
+
+.card .card__content .card__title {
+    font-size: 24px; /* 调整字体大小 */
+    color: #fff;
+    text-transform: capitalize;
+}
+
+.card .card__content .card__describe {
+    color: #fff;
+    font-size: 14px; /* 调整字体大小 */
+}
+
